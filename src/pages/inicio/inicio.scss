@@ -1,0 +1,27 @@
+page-inicio {
+
+    .user{
+        display: flex;
+    }
+
+    .imgUser{
+        width: 40%;
+        height: 40%;
+        margin: 35px auto 30px auto;
+    }
+
+    .nomCliente{
+        width: 50%;
+        align-self: center;
+        font-size: 2rem;
+    }
+
+    .opcion{
+        border: none!important;
+    }
+
+    .item-inner{
+        border: none!important;
+    }
+
+}

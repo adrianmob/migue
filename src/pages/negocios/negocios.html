@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Listado de negocios : {{userModel.nombreUsuario}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+    <div class="user">
+        <img class="imgUser" [src]="imgSource">
+        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>
+    </div>
+
+   <h2 class="titNeg">Mis Negocios</h2> 
+  <ion-list>
+    <ion-item *ngFor="let biz of negocioModel" class="contNeg" (click)="negocioDetalle(biz)">
+        <ion-thumbnail item-start class="logo">
+            <img src="../../assets/imgs/toks.png">
+          </ion-thumbnail>
+          <h2 class="nombreNeg">{{biz.nombre}}</h2>
+          <div class="contenedorEstrellas">
+              <ion-icon class="estrella" name='star'></ion-icon>
+              <ion-icon class="estrella" name='star'></ion-icon>
+              <ion-icon class="estrella" name='star'></ion-icon>
+              <ion-icon class="estrella" name='star'></ion-icon>
+              <ion-icon class="estrella" name='star'></ion-icon>
+            </div>
+      </ion-item>
+
+  </ion-list>
+
+  <ion-fab right bottom (click)="agregarNegocio($event)">
+      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>
+  </ion-fab> 
+</ion-content>

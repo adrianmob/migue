@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Listado de productos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+  <div class="titulo">
+    <img src="/assets/imgs/NEGOCIO.png" alt="">
+    <h2 class="nomNeg">Nombre del negocio</h2>
+  </div>
+
+  <h3>Datos del producto</h3>
+
+            <form [formGroup]="formGroup">
+                
+                <div class="producto">
+                    <img class="imgPro" src="/assets/imgs/producto.png">
+                    <button color="light" class="camara" ion-button icon-only (click)="capturarFotoProducto()">
+                        <ion-icon class="icono" name="camera"></ion-icon>
+                    </button>
+                </div>
+              <ion-list>
+              <ion-item class="campo">
+                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>
+                </ion-item>
+                <ion-item *ngIf="platillo.hasError('required') && platillo.touched">
+                  <p>
+              *Falta Nombre del platillo
+                  </p>
+                  </ion-item>
+                  <ion-item class="campo"> 
+                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="text"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="precio.hasError('required') && precio.touched">
+                    <p>
+                *Falta Precio
+                    </p>
+                    </ion-item>
+                    <ion-item class="campo"> 
+                        <ion-input class="entrada" placeholder="Cantidad" [disabled]="editar" type="text"  [(ngModel)]="producto.cantidad" formControlName="cantidad"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="precio.hasError('required') && cantidad.touched">
+                      <p>
+                  *Falta Cantidad
+                      </p>
+                      </ion-item>
+                    <ion-item class="campo">
+                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="descripcion.hasError('required') && descripcion.touched">
+                        <p>
+                    *Falta Descripcion
+                        </p>
+                        </ion-item>
+            </ion-list>
+          </form>
+
+        <ion-grid>
+  
+        <ion-row>
+              <!-- <ion-fab bottom right>
+        <button ion-fab (click)="agregarProducto($event)">+</button>
+    </ion-fab> -->
+    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
+<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >
+    Agregar Producto
+  </button> -->
+            <!-- [disabledd]="formGroup.invalid"
+        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >
+          Guardar  Negocio
+        </button> -->
+            <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >
+              Guardar Producto
+            </button>
+        </ion-row>
+      </ion-grid>
+</ion-content>

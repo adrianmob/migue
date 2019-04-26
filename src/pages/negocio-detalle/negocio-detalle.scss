@@ -1,0 +1,25 @@
+page-negocio-detalle {
+    .contBanner{
+        position: relative;
+        margin-top: 15px;
+    }
+    
+    .logo{
+        position: absolute;
+        bottom: -30%;
+        left: 0;
+        right: 0;
+        width: 35%;
+        margin: 0 auto;
+    }
+
+    .contLogo{
+        margin-bottom: 22%;
+    }
+    
+    .more{
+        font-size: 3.5rem;
+        font-weight: bold;
+      }
+
+}

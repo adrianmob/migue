@@ -1,0 +1,155 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Editar Negocio</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+      <div class="contBanner">
+          <img class=banner src="/assets/imgs/banner.jpg" alt="">
+           <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="capturarFoto()">
+            <ion-icon class="icono" name="camera"></ion-icon>
+          </button>
+          <div class="contLogo">
+            <img class=logo src="/assets/imgs/toks.png" alt="">
+            <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="capturarFoto()">
+                <ion-icon class="icono" name="camera"></ion-icon>
+            </button>
+          </div>
+      </div>
+    <form [formGroup]="formGroup">
+      <ion-list>
+    <ion-item class="campo">
+        <ion-input class="entrada" placeholder="Nombre del negocio" [disabled]="editar" type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>
+      </ion-item>
+        <ion-item *ngIf="nombre.hasError('required') && nombre.touched ">
+        <p>
+        *Nombre del negocio es obligatorio
+        </p>
+        </ion-item>
+
+        <ion-item class="campo">
+            <ion-input class="entrada" placeholder="Calle y Numero" [disabled]="editar" type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>
+          </ion-item>
+            <ion-item *ngIf="callenumero.hasError('required') && callenumero.touched ">
+            <p>
+      *Calle y numero es obligatorio
+            </p>
+            </ion-item>
+
+            <ion-item class="campo">
+                <ion-input class="entrada" placeholder="Colonia" [disabled]="editar" type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>
+              </ion-item>
+                <ion-item *ngIf="colonia.hasError('required') && colonia.touched ">
+                <p>
+          *Colonia es obligatorio
+                </p>
+                </ion-item>
+
+                <ion-item class="campo">
+                    <ion-input class="entrada" placeholder="Ciudad" [disabled]="editar" type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>
+                  </ion-item>
+                    <ion-item *ngIf="ciudad.hasError('required') && ciudad.touched ">
+                    <p>
+              *Ciudad es obligatorio
+                    </p>
+                    </ion-item>
+
+                    <ion-item class="campo">
+                        <ion-input class="entrada" placeholder="Estado" [disabled]="editar" type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="estado.hasError('required') && estado.touched">
+                        <p>
+                    *Estado es obligatorio
+                        </p>
+                        </ion-item>
+
+                        <ion-item class="campo">
+                          <ion-input p class="entrada"laceholder="Codigo Postal" [disabled]="editar" type="text" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>
+                        </ion-item>
+                        <ion-item *ngIf="codigopostal.hasError('required') && codigopostal.touched">
+                          <p>
+                      *Codigo Postal es obligatorio
+                          </p>
+                          </ion-item>
+                          <ion-item class="campo">
+                              <ion-input class="entrada" placeholder="Hora Apertura" [disabled]="editar" type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura"></ion-input>
+                            </ion-item>
+                            <ion-item *ngIf="horaapertura.hasError('required') && horaapertura.touched">
+                              <p>
+                          *Hora Apertura es obligatorio
+                              </p>
+                              </ion-item>
+                              <ion-item class="campo">
+                                  <ion-input class="entrada" placeholder="Hora Cierre" [disabled]="editar" type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre"></ion-input>
+                                </ion-item>
+                                <ion-item *ngIf="horacierre.hasError('required') && horacierre.touched">
+                                  <p>
+                              *Hora Cierre es obligatorio
+                                  </p>
+                                  </ion-item>
+                                  <ion-item class="campo">
+                                    <ion-label>Categoria</ion-label>
+                                    <ion-select [disabled]="editar" [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria">
+                                      <ion-option value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>
+                                    </ion-select>
+                                  </ion-item>
+                            <!-- <ion-item>
+                              <ion-label>
+                                Categoria
+                              </ion-label>
+                              <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>
+                            </ion-item> -->
+                            <!-- <ion-item *ngIf="categoria.hasError('required') && categoria.touched">
+                              <p>
+                          *Categoria es obligatorio
+                              </p>
+                              </ion-item> -->
+
+                              <ion-item class="campo">
+                                  <ion-label>
+                                    Subcategoria
+                                  </ion-label>
+                                  <ion-select [disabled]="editar" [(ngModel)]="negocio.FK_subcategoria" formControlName="FK_subcategoria" placeholder="Selecciona una subcagetoria">
+                                      <ion-option value="{{subcat.fK_CATNEGOCIO}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                                <!-- <ion-item *ngIf="subcategoria.hasError('required') && subcategoria.touched">
+                                  <p>
+                              *Subcategoria es obligatorio
+                                  </p>
+                                  </ion-item> -->
+
+                                  <ion-item class="campo">
+                                      <ion-input class="entrada" placeholder="Descripcion" [disabled]="editar" type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>
+                                    </ion-item>
+                                    <ion-item *ngIf="descripcion.hasError('required') && descripcion.touched">
+                                      <p>
+                                  *Descripcion es obligatorio
+                                      </p>
+                                      </ion-item>
+
+
+
+
+
+      </ion-list>
+    <ion-grid>
+      <ion-row>
+               <!-- [disabledd]="formGroup.invalid" -->
+        <button type="submit"  ion-button full color="light" (click)="editarNegocio($event, negocio)" >
+          Editar Negocio
+        </button>
+      </ion-row>
+    <ion-row>
+        <!-- [disabledd]="formGroup.invalid" -->
+    <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >
+      Guardar  Negocio
+    </button>
+    </ion-row>
+
+    </ion-grid>
+
+    </form>
+
+    </ion-content>

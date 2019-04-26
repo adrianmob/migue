@@ -1,0 +1,35 @@
+page-login {
+
+    .imgUser{
+        width: 200px;
+        margin: 35px auto 30px auto;
+        display: block;
+    }
+
+    .list{
+        margin-bottom: 0;
+    }
+
+    .correo, .contraseña{
+        border: none!important;
+    }
+
+    .correo{
+        margin-top: 20px;
+    }
+
+    .item-inner{
+        border: none!important;
+    }
+
+    .correo-input, .contraseña-input{
+        border: 1px solid #9c9898;
+        margin-bottom: 20px;
+        border-radius: 6px;
+    }
+
+    .text-input{
+        text-align: center;
+    }
+
+}

@@ -1,0 +1,28 @@
+page-recuperarcuenta {
+
+    .imgUser{
+        width: 200px;
+        margin: 35px auto 30px auto;
+        display: block;
+    }
+
+    .campo{
+        border: none!important;
+    }
+
+    .item-inner{
+        border: none!important;
+    }
+
+    .correo-input, .contraseña-input, .confirm-input{
+        border: 1px solid #9c9898;
+        margin-bottom: 20px;
+        border-radius: 6px;
+    }
+
+    .text-input{
+        text-align: center;
+    }
+
+
+}

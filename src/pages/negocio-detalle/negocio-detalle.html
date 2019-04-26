@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{negocioModel.nombre}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="contBanner">
+        <img class=banner src="/assets/imgs/banner.jpg" alt="">
+        <div class="contLogo">
+          <img class=logo src="/assets/imgs/toks.png" alt="">
+        </div>
+      </div>
+
+    <button ion-button clear (click)="verMapa(negocioModel)" >Ubicación y Horario</button>
+
+<ion-item-divider >
+    <button ion-button full color="light" (click)="editarNegocio(negocioModel)" >
+        Editar Perfil del Negocio
+      </button>
+  </ion-item-divider>
+  <ion-fab right bottom (click)="agregarProducto(negocioModel)">
+      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>
+  </ion-fab> 
+
+</ion-content>
