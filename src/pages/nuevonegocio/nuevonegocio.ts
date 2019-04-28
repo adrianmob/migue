@@ -18,7 +18,13 @@ export class NuevonegocioPage {
   userModel: User = new User();
   catnegocio: CatNegocio[];
   subcatnegocio: SubCatNegocio[];
-  imgSource:any  = '/assets/imgs/tienda-online-icono-png.png';
+
+  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
+  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
+
+  cameraImgLogo:any = null;
+  cameraImgBanner:any = null;
+
   negocio: Negocio = new Negocio();
   formGroup: FormGroup;
 
@@ -70,48 +76,6 @@ export class NuevonegocioPage {
       this.descripcion = this.formGroup.controls['descripcion'];
 
     this.userModel =  navParams.get('item');
-
-  }
-
-  capturarFotoPerfil()
-  {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      targetHeight: 500,
-      targetWidth: 500
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      this.imgSource = imageData;
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-     }, (err) => {
-      // Handle error
-     });
-
-  }
-
-  capturarFotoPortada()
-  {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      targetHeight: 500,
-      targetWidth: 500
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      this.imgSource = imageData;
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-     }, (err) => {
-      // Handle error
-     });
 
   }
 
@@ -264,6 +228,54 @@ export class NuevonegocioPage {
 
   catChange($event, subcat)
   {
+
+  }
+
+  capturarFotoLogo()
+  {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      saveToPhotoAlbum: false,
+      targetHeight: 500,
+      targetWidth: 500
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.cameraImgLogo = 'data:image/jpeg;base64,' + imageData;;
+      if(this.cameraImgLogo !== null)
+      {
+        this.imgSourceLogo = this.cameraImgLogo;
+      }
+     }, (err) => {
+      // Handle error
+     });
+
+  }
+
+  capturarFotoBanner()
+  {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      saveToPhotoAlbum: false,
+      targetHeight: 500,
+      targetWidth: 500
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.cameraImgBanner = 'data:image/jpeg;base64,' + imageData;;
+      if(this.cameraImgBanner !== null)
+      {
+        this.imgSourceBanner = this.cameraImgBanner;
+      }
+     }, (err) => {
+      // Handle error
+     });
 
   }
 

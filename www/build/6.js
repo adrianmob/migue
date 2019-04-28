@@ -1,14 +1,14 @@
 webpackJsonp([6],{
 
-/***/ 722:
+/***/ 869:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NegocioDetallePageModule", function() { return NegocioDetallePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PedidosEntregadosPageModule", function() { return PedidosEntregadosPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__negocio_detalle__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pedidos_entregados__ = __webpack_require__(221);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var NegocioDetallePageModule = /** @class */ (function () {
-    function NegocioDetallePageModule() {
+var PedidosEntregadosPageModule = /** @class */ (function () {
+    function PedidosEntregadosPageModule() {
     }
-    NegocioDetallePageModule = __decorate([
+    PedidosEntregadosPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__negocio_detalle__["a" /* NegocioDetallePage */],
+                __WEBPACK_IMPORTED_MODULE_2__pedidos_entregados__["a" /* PedidosEntregadosPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__negocio_detalle__["a" /* NegocioDetallePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__pedidos_entregados__["a" /* PedidosEntregadosPage */]),
             ],
         })
-    ], NegocioDetallePageModule);
-    return NegocioDetallePageModule;
+    ], PedidosEntregadosPageModule);
+    return PedidosEntregadosPageModule;
 }());
 
-//# sourceMappingURL=negocio-detalle.module.js.map
+//# sourceMappingURL=pedidos-entregados.module.js.map
 
 /***/ })
 

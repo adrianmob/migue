@@ -1,3 +1,4 @@
+import { PedidosNoEntregadosPage } from './../pages/pedidos-no-entregados/pedidos-no-entregados';
 import { NegocioDetalleEditarPage } from './../pages/negocio-detalle-editar/negocio-detalle-editar';
 import { MapPage } from './../pages/map/map';
 import { NegocioAgregarProductoPage } from './../pages/negocio-agregar-producto/negocio-agregar-producto';
@@ -24,6 +25,14 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { PedidosPage } from '../pages/pedidos/pedidos';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { PedidosTodosPage } from '../pages/pedidos-todos/pedidos-todos';
+import { PedidosEntregadosPage } from '../pages/pedidos-entregados/pedidos-entregados';
+
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { fireBaseConfig } from '../config';
+
 
 @NgModule({
   declarations: [
@@ -42,12 +51,16 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
     NegocioAgregarProductoPage,
     MapPage,
     NegocioDetalleEditarPage,
+    PedidosTodosPage,
+    PedidosEntregadosPage,
+    PedidosNoEntregadosPage,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    AgmCoreModule.forRoot({apiKey : 'AIzaSyC49V2M_OYaf8GfKsXN6_Nk-pf50Y5ulcA'})
+    AgmCoreModule.forRoot({apiKey : 'AIzaSyC49V2M_OYaf8GfKsXN6_Nk-pf50Y5ulcA'}),
+    AngularFireModule.initializeApp(fireBaseConfig.fire)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,7 +77,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
     NegocioDetallePage,
     NegocioAgregarProductoPage,
     MapPage,
-    NegocioDetalleEditarPage
+    NegocioDetalleEditarPage,
+    PedidosTodosPage,
+    PedidosEntregadosPage,
+    PedidosNoEntregadosPage
   ],
   providers: [
     StatusBar,
@@ -72,7 +88,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ElstorapiProvider,
     Geolocation,
-    Camera
+    Camera,
+    AngularFireAuth
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

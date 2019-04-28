@@ -33,7 +33,11 @@ export class NegocioDetalleEditarPage {
   FK_subcategoria:AbstractControl;
   descripcion:AbstractControl;
 
-  imgSource:any  = '/assets/imgs/tienda-online-icono-png.png';
+  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
+  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
+
+  cameraImgLogo:any = null;
+  cameraImgBanner:any = null;
 
   editar: boolean = true;
 
@@ -165,8 +169,11 @@ export class NegocioDetalleEditarPage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.imgSource = imageData;
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.cameraImgLogo = 'data:image/jpeg;base64,' + imageData;;
+      if(this.cameraImgLogo !== null)
+      {
+        this.imgSourceLogo = this.cameraImgLogo;
+      }
      }, (err) => {
       // Handle error
      });
@@ -186,8 +193,11 @@ export class NegocioDetalleEditarPage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.imgSource = imageData;
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.cameraImgBanner = 'data:image/jpeg;base64,' + imageData;;
+      if(this.cameraImgBanner !== null)
+      {
+        this.imgSourceBanner = this.cameraImgBanner;
+      }
      }, (err) => {
       // Handle error
      });

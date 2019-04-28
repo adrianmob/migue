@@ -25,6 +25,7 @@ export class PerfilPage {
   isDisabled: boolean = true;
 
   imgSource:any  = '/assets/imgs/user.png';
+  cameraImg:any = null;
 
 
   constructor(public navCtrl: NavController,
@@ -123,8 +124,11 @@ export class PerfilPage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.imgSource = imageData;
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.cameraImg = 'data:image/jpeg;base64,' + imageData;;
+      if(this.cameraImg !== null)
+      {
+        this.imgSource = this.cameraImg;
+      }
      }, (err) => {
       // Handle error
      });

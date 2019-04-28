@@ -4,6 +4,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import AuthProvider = firebase.auth.AuthProvider;
+
 // local
 
  const baseurlRegistro: string = "https://localhost:5001/api/registro/usuario";
@@ -22,17 +26,18 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 // aws
 
-// const baseurlRegistro: string = "https://ec2-54-183-223-34.us-west-1.compute.amazonaws.com/api/registro/usuario";
-// const baseurlActualizar: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/cuenta/actualizar";
-// const baseurlLogin: string = "https://ec2-54-183-223-34.us-west-1.compute.amazonaws.com/api/usuario/inicio";
-// const baseurlRecuperar: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/cuenta/recuperar";
-// const baseurlNegocio: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/negocio/agregar";
-// const baseurlNegocioObtener: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/negocio/obtener";
-// const baseurlCatNegocio: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/negocio/catnegocio";
-// const baseurlSubCatNegocio: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/negocio/subcatnegocio";
+// const baseurlRegistro: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/registro/usuario";
+// const baseurlActualizar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/cuenta/actualizar";
+// const baseurlLogin: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/usuario/inicio";
+// const baseurlRecuperar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/cuenta/recuperar";
+// const baseurlNegocioEditar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/editar";
+// const baseurlNegocio: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/agregar";
+// const baseurlNegocioObtener: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/obtener";
+// const baseurlCatNegocio: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/catnegocio";
+// const baseurlSubCatNegocio: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/subcatnegocio";
 
-// const baseurlProductoObtener: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/negocio/producto/obtener";
-// const baseurlProductoAgregar: string = "https://ec2-52-53-196-2.us-west-1.compute.amazonaws.com/api/negocio/producto/agregar";
+// const baseurlProductoObtener: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/producto/obtener";
+// const baseurlProductoAgregar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/producto/agregar";
 
 
 const httpOptions = {
@@ -44,8 +49,15 @@ const httpOptions = {
 @Injectable()
 export class ElstorapiProvider {
 
+  private user: firebase.User;
 
-  constructor(public http: HttpClient) {
+  
+  constructor(public http: HttpClient,
+    public afAuth: AngularFireAuth) {
+
+      afAuth.authState.subscribe(user => {
+        this.user = user;
+      });
 
   }
 

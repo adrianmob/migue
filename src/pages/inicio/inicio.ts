@@ -18,6 +18,7 @@ export class InicioPage {
     public navParams: NavParams)
   {
       this.userModel = navParams.get('item');
+      this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
       console.log(this.userModel);
   }
 

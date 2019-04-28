@@ -6,13 +6,13 @@
 
   <ion-content>
       <div class="contBanner">
-          <img class=banner src="/assets/imgs/banner.jpg" alt="">
-           <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="capturarFoto()">
+          <img class=banner [src]="imgSourceLogo" alt="">
+           <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="capturarFotoPortada()">
             <ion-icon class="icono" name="camera"></ion-icon>
           </button>
           <div class="contLogo">
-            <img class=logo src="/assets/imgs/toks.png" alt="">
-            <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="capturarFoto()">
+            <img class=logo [src]="imgSourceBanner" alt="">
+            <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="capturarFotoPerfil()">
                 <ion-icon class="icono" name="camera"></ion-icon>
             </button>
           </div>

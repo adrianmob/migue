@@ -25,6 +25,7 @@ export class RegisterPage {
   numeroTelefonico:AbstractControl;
 
   imgSource:any  = '/assets/imgs/user.png';
+  cameraImg:any = null;
 
 
   constructor(public navCtrl: NavController,
@@ -70,6 +71,7 @@ export class RegisterPage {
     let title = '';
     let subTitle = '';
     this.userModel = usr;
+    this.userModel.fotografia = this.imgSource;
 
     this.api.registrarUsuario(usr).subscribe(
       (data: User) => {
@@ -120,17 +122,21 @@ export class RegisterPage {
   {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      targetHeight: 500,
-      targetWidth: 500
+      // saveToPhotoAlbum: true,
+      // targetHeight: 500,
+      // targetWidth: 500
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.imgSource = imageData;
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.cameraImg = 'data:image/jpeg;base64,' + imageData;;
+      if(this.cameraImg !== null)
+      {
+        this.imgSource = this.cameraImg;
+      }
+     // let base64Image = 'data:image/jpeg;base64,' + imageData;
      }, (err) => {
       // Handle error
      });

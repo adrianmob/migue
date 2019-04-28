@@ -1,10 +1,17 @@
-
 <ion-header>
   <ion-navbar>
     <ion-title>Listado de pedidos : {{userModel.nombreUsuario}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-tabs>
+  <ion-tab title="Todos" [root]="pedidosTodos" tabIcon="podium">
 
-</ion-content>
+  </ion-tab>
+  <ion-tab title="Entregados" [root]="pedidosEntregados" tabIcon="podium">
+
+  </ion-tab>
+  <ion-tab title="No Entregados" [root]="pedidosNoEntregados" tabIcon="podium">
+
+  </ion-tab>
+</ion-tabs>
