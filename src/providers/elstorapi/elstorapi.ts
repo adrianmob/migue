@@ -7,6 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
+import { AngularFireDatabase } from '@angular/fire/database';
+
 
 // local
 
@@ -50,15 +52,33 @@ const httpOptions = {
 export class ElstorapiProvider {
 
   private user: firebase.User;
+  items: Observable<any[]>;
 
-  
   constructor(public http: HttpClient,
-    public afAuth: AngularFireAuth) {
+    public afAuth: AngularFireAuth,
+    public afDB: AngularFireDatabase) {
+      
 
       afAuth.authState.subscribe(user => {
         this.user = user;
       });
 
+  }
+
+  obtenerPedidos():Observable<any[]>
+  {
+     this.items = this.afDB.list('/pedidos').valueChanges();
+
+     return this.items.pipe(
+      tap((data: any) => {
+
+      //console.log(data);
+  }),
+  catchError((err) => {
+
+    throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        })
+  );;
   }
 
   registrarUsuario(usr: User): Observable<User>

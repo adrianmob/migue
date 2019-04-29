@@ -31,6 +31,7 @@ import { PedidosEntregadosPage } from '../pages/pedidos-entregados/pedidos-entre
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { fireBaseConfig } from '../config';
 
 
@@ -89,7 +90,8 @@ import { fireBaseConfig } from '../config';
     ElstorapiProvider,
     Geolocation,
     Camera,
-    AngularFireAuth
+    AngularFireAuth,
+    AngularFireDatabase
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
