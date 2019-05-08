@@ -12,6 +12,9 @@ page-negocio-detalle {
         width: 35%;
         margin: 0 auto;
     }
+    .logoProd{
+
+  }
 
     .contLogo{
         margin-bottom: 22%;
@@ -21,5 +24,49 @@ page-negocio-detalle {
         font-size: 3.5rem;
         font-weight: bold;
       }
-
+    
+    .nomCliente{
+        width: 50%;
+        align-self: center;
+        font-size: 2rem;
+    }
+    
+    .titNeg{
+        padding: 0 0 10px 20px;
+        margin: 5px 0 10px 0;
+    }
+    
+      .contNeg{
+        margin-bottom: 20px;
+        border: none!important;
+      }
+    
+      .logoimg{
+        width: 80px;
+        height: 80px;
+      }
+    
+      .nombreNeg{
+        font-size: 1.7rem;
+      }
+    
+      .item-inner{
+        border: none!important;
+      }
+    
+      .contenedorEstrellas{
+        margin-top: 15px;
+      }
+    
+      .estrella{
+        color: #FDC300;
+        font-size: 23px;
+      } 
+    
+      .more{
+        font-size: 3.5rem;
+        font-weight: bold;
+      }
 }
+
+

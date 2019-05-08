@@ -25862,6 +25862,51 @@ page-negocio-detalle .more {
   font-weight: bold;
 }
 
+page-negocio-detalle .nomCliente {
+  width: 50%;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  font-size: 2rem;
+}
+
+page-negocio-detalle .titNeg {
+  padding: 0 0 10px 20px;
+  margin: 5px 0 10px 0;
+}
+
+page-negocio-detalle .contNeg {
+  margin-bottom: 20px;
+  border: none !important;
+}
+
+page-negocio-detalle .logoimg {
+  width: 80px;
+  height: 80px;
+}
+
+page-negocio-detalle .nombreNeg {
+  font-size: 1.7rem;
+}
+
+page-negocio-detalle .item-inner {
+  border: none !important;
+}
+
+page-negocio-detalle .contenedorEstrellas {
+  margin-top: 15px;
+}
+
+page-negocio-detalle .estrella {
+  color: #FDC300;
+  font-size: 23px;
+}
+
+page-negocio-detalle .more {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
 page-negocio-detalle-editar .contBanner {
   position: relative;
 }

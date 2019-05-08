@@ -1,3 +1,4 @@
+import { NegocioDetallePage } from './../negocio-detalle/negocio-detalle';
 import { Producto } from './../../models/model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
@@ -47,42 +48,57 @@ export class NegocioAgregarProductoPage {
         this.cantidad = this.formGroup.controls['cantidad'];
 
       this.negocioModel =  navParams.get('item');
-      this.producto.FK_idNegocio = this.negocioModel.id_negocio;
+      this.producto.negocioid = this.negocioModel.clientid;
   }
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
-    this.cargarProducto();
+    
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
 
   agregarProducto(prod, biz, $event)
   {
-    console.log(prod,biz)
+    const toast = this.toastController.create({
+      message: 'Ocurrio un error...',
+      showCloseButton: true,
+      position: 'bottom',
+      closeButtonText: 'Done'
+    });
+
+    let alert = this.alertCtrl.create({
+      title: 'Producto Agregado',
+      subTitle: 'Producto Agregado correctamente!',
+      buttons: [{
+        text: 'Ok',
+      handler: () => {
+
+        this.navCtrl.push(NegocioDetallePage, {item:this.negocioModel});
+      }
+    }]
+    });
+debugger;
+    // console.log(prod,biz)
     this.api.agregarProducto(prod).subscribe(
       (data: Producto) => {
       if(data !== null)
         {
-            // alert.present().then(() => {
+            alert.present().then(() => {
 
-            // });
+            });
 
         }
       else
       {
-          // toast.present().then(() => {
-          //     toast.dismiss();
-          // });
+          toast.present().then(() => {
+              toast.dismiss();
+          });
       }
       },
        (error: any) => console.log(error));
   }
 
-  cargarProducto()
-  {
-
-  }
   cancelar()
   {
     this.navCtrl.pop();

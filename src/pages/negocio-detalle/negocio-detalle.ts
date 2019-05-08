@@ -1,10 +1,11 @@
 import { NegocioDetalleEditarPage } from './../negocio-detalle-editar/negocio-detalle-editar';
 import { MapPage } from './../map/map';
-import { Negocio } from './../../models/model';
+import { Negocio, Producto } from './../../models/model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NegocioAgregarProductoPage } from '../negocio-agregar-producto/negocio-agregar-producto';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 
 @IonicPage()
 @Component({
@@ -16,12 +17,14 @@ export class NegocioDetallePage {
   negocioModel: Negocio;
   imgSource:any  = '/assets/imgs/user.png';
   mostrarDiv: boolean = false;
+  productos: Producto[];
   //producto model
 
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public geolocation: Geolocation) {
+    public geolocation: Geolocation,
+    public api: ElstorapiProvider) {
 
       this.negocioModel =  navParams.get('item');
       console.log(this.negocioModel);
@@ -30,7 +33,7 @@ export class NegocioDetallePage {
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
-
+    this.cargarProducto();
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -49,5 +52,25 @@ export class NegocioDetallePage {
   editarNegocio($event, bz)
   {
     this.navCtrl.push(NegocioDetalleEditarPage, {item:this.negocioModel})
+  }
+
+  cargarProducto()
+  {
+    this.api.getProductos(this.negocioModel).subscribe(
+      (data: Producto[]) => {
+        if(data !== null)
+        {
+          this.productos = data;
+        }
+        else
+        {
+            // toast.present().then(() => {
+            //   toast.dismiss();
+            // });
+        }
+      },
+       (error: any) =>  {
+         console.log(error)
+        });
   }
 }

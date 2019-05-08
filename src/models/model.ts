@@ -80,7 +80,6 @@ export class Producto
   fotografia: string = "";
   cantidad: number = null;
   precio: number = null;
-  FK_idNegocio: number = null;
   negocioid: string =  null;
 }
 

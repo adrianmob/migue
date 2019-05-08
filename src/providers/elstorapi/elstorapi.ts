@@ -224,9 +224,9 @@ export class ElstorapiProvider {
         );
     }
 
-    getProductos(clientid: string) : Observable<Producto[]>
+    getProductos(negocio: Negocio) : Observable<Producto[]>
     {
-      return this.http.post<SubCatNegocio[]>(baseurlProductoObtener, clientid, httpOptions)
+      return this.http.post<Producto[]>(baseurlProductoObtener, negocio, httpOptions)
       .pipe(
         tap((data: any) => {
 
