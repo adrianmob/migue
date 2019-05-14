@@ -24,6 +24,8 @@ export class NegociosPage {
 
   tcontroller: ToastController;
 
+  enableButton:boolean = true;
+
   constructor(public navCtrl: NavController,
             public navParams: NavParams,
             public api: ElstorapiProvider,
@@ -72,9 +74,18 @@ export class NegociosPage {
         (data: Negocio[]) => {
           if(data !== null)
           {
-              this.negocioModel = data;
-              this.mostrarDiv = false;
-              console.log(data);
+              if(data.length == 0)
+              {
+                this.negocioModel = data;
+                this.enableButton = true;
+                console.log(data);
+              }
+              else
+              {
+                //disable
+                this.negocioModel = data;
+                this.enableButton = false;
+              }
           }
           else
           {

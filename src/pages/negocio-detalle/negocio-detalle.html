@@ -15,8 +15,9 @@
     <button ion-button clear (click)="verMapa(negocioModel)" >Ubicación y Horario</button>
     <h2 class="titNeg">Mis Productos</h2> 
     <ion-list>
-      <ion-item *ngFor="let prod of productos" class="contNeg">
-          <ion-thumbnail item-start class="logoProd">
+      <ion-item-sliding *ngFor="let prod of productos" class="contNeg">
+          <ion-item>
+            <ion-thumbnail item-start class="logoProd">
               <img [src]="prod.fotografia" class="logimg">
             </ion-thumbnail>
             <h2 class="nombreNeg">{{prod.nombre}}</h2>
@@ -27,8 +28,11 @@
                 <ion-icon class="estrella" name='star'></ion-icon>
                 <ion-icon class="estrella" name='star'></ion-icon>
               </div>
-        </ion-item>
-  
+          </ion-item>
+            <ion-item-options>
+              <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>
+          </ion-item-options>
+        </ion-item-sliding>
     </ion-list>
 
 <ion-item-divider >

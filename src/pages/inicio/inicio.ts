@@ -4,6 +4,7 @@ import { PedidosPage } from './../pedidos/pedidos';
 import { PerfilPage } from './../perfil/perfil';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
@@ -15,10 +16,17 @@ export class InicioPage {
   imgSource:any  = '/assets/imgs/user.png';
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams)
+    public navParams: NavParams,
+    private _sanitizer: DomSanitizer)
   {
       this.userModel = navParams.get('item');
-      this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
+      debugger
+      this.imgSource = this.userModel.fotografia !== "" ? 
+                        this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+                        + this.userModel.fotografia): this.imgSource;
+
+      // this.userModel.fotografia = this.userModel.fotografia !== ""? 'data:image/jpeg;base64,' + this.userModel.fotografia: this.userModel.fotografia; 
+      // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
       console.log(this.userModel);
   }
 

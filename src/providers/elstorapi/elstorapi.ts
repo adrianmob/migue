@@ -26,6 +26,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
  const baseurlProductoObtener: string = "https://localhost:5001/api/negocio/producto/obtener";
  const baseurlProductoAgregar: string = "https://localhost:5001/api/negocio/producto/agregar";
 
+ const baseurlProductoBorrar: string = "https://localhost:5001/api/negocio/producto/borrar";
+
 // aws
 
 // const baseurlRegistro: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/registro/usuario";
@@ -244,6 +246,23 @@ export class ElstorapiProvider {
       let prodModel =  JSON.stringify(prod);
       debugger;
       return this.http.post<Producto>(baseurlProductoAgregar, prodModel, httpOptions)
+      .pipe(
+        tap((data: any) => {
+
+          //console.log(data);
+      }),
+      catchError((err) => {
+
+        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            })
+        );
+    }
+
+    borrarProducto(prod: Producto): Observable<Producto[]>
+    {
+      let prodModel =  JSON.stringify(prod);
+      debugger;
+      return this.http.post<Producto>(baseurlProductoBorrar, prodModel, httpOptions)
       .pipe(
         tap((data: any) => {
 

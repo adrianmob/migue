@@ -28,6 +28,6 @@
   </ion-list>
 
   <ion-fab right bottom (click)="agregarNegocio($event)">
-      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>
+      <button *ngIf="enableButton" ion-fab ><ion-icon class="more" name="add"></ion-icon></button>
   </ion-fab> 
 </ion-content>

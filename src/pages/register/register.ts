@@ -95,8 +95,8 @@ export class RegisterPage {
                     content: 'Iniciando sesion...'
                   });
                   loader.present().then(() => {
-                    this.navCtrl.push(InicioPage, {item:this.userModel});
                     loader.dismiss();
+                    this.navCtrl.push(InicioPage, {item:this.userModel});
                   });
                 }
             }

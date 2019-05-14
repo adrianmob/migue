@@ -73,4 +73,26 @@ export class NegocioDetallePage {
          console.log(error)
         });
   }
+
+  borrarProducto(prod)
+  {
+    this.api.borrarProducto(prod).subscribe(
+      (data: Producto[]) => {
+        debugger
+        if(data !== null)
+        {
+          this.productos = data;
+        }
+        else
+        {
+          debugger
+            // toast.present().then(() => {
+            //   toast.dismiss();
+            // });
+        }
+      },
+       (error: any) =>  {
+         console.log(error)
+        });
+  }
 }

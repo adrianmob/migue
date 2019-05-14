@@ -11,6 +11,7 @@ webpackJsonp([14],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__perfil_perfil__ = __webpack_require__(228);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -26,14 +27,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var InicioPage = /** @class */ (function () {
-    function InicioPage(navCtrl, navParams) {
+    function InicioPage(navCtrl, navParams, _sanitizer) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this._sanitizer = _sanitizer;
         this.userModel = new __WEBPACK_IMPORTED_MODULE_0__models_model__["c" /* User */]();
         this.imgSource = '/assets/imgs/user.png';
         this.userModel = navParams.get('item');
-        this.imgSource = this.userModel.fotografia != "" ? this.userModel.fotografia : this.imgSource;
+        debugger;
+        this.imgSource = this.userModel.fotografia !== "" ?
+            this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
+                + this.userModel.fotografia) : this.imgSource;
+        // this.userModel.fotografia = this.userModel.fotografia !== ""? 'data:image/jpeg;base64,' + this.userModel.fotografia: this.userModel.fotografia; 
+        // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
         console.log(this.userModel);
     }
     InicioPage.prototype.ionViewDidLoad = function () { };
@@ -55,7 +63,8 @@ var InicioPage = /** @class */ (function () {
             selector: 'page-inicio',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/inicio/inicio.html"*/'\n<ion-header>\n  <ion-navbar>\n    <ion-title>Bienvenido  a tu perfil {{userModel.nombreUsuario}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="imgSource">\n        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>\n      </div>\n<h2>Opciones del Menú</h2>\n  <ion-list>\n      <ion-item class="opcion" (click)="verPerfil($event)">\n          <ion-thumbnail item-start>\n            <img [src]="imgSource">\n          </ion-thumbnail>\n          <h2>Mi Perfil</h2>\n        </ion-item>\n        <ion-item class="opcion" (click)="verPedidos($event)">\n            <ion-thumbnail item-start>\n              <img src="/assets/imgs/tienda-online-icono-png.png">\n            </ion-thumbnail>\n            <h2>Mis Pedidos</h2>\n          </ion-item>\n          <ion-item class="opcion" (click)="verNegocios($event)">\n              <ion-thumbnail item-start>\n                <img src="/assets/imgs/iconos-formas-de-envio-2.png">\n              </ion-thumbnail>\n              <h2>Mis Negocios</h2>\n            </ion-item> \n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/inicio/inicio.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* NavParams */]])
+            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["c" /* DomSanitizer */]])
     ], InicioPage);
     return InicioPage;
 }());
@@ -134,9 +143,25 @@ var NegocioDetallePage = /** @class */ (function () {
             console.log(error);
         });
     };
+    NegocioDetallePage.prototype.borrarProducto = function (prod) {
+        this.api.borrarProducto(prod).subscribe(function (data) {
+            debugger;
+            if (data !== null) {
+                debugger;
+            }
+            else {
+                debugger;
+                // toast.present().then(() => {
+                //   toast.dismiss();
+                // });
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    };
     NegocioDetallePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
-            selector: 'page-negocio-detalle',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocio-detalle/negocio-detalle.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>{{negocioModel.nombre}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div class="contBanner">\n        <img class=banner src="/assets/imgs/banner.jpg" alt="">\n        <div class="contLogo">\n          <img class=logo src="/assets/imgs/toks.png" alt="">\n        </div>\n      </div>\n\n    <button ion-button clear (click)="verMapa(negocioModel)" >Ubicación y Horario</button>\n    <h2 class="titNeg">Mis Productos</h2> \n    <ion-list>\n      <ion-item *ngFor="let prod of productos" class="contNeg">\n          <ion-thumbnail item-start class="logoProd">\n              <img [src]="prod.fotografia" class="logimg">\n            </ion-thumbnail>\n            <h2 class="nombreNeg">{{prod.nombre}}</h2>\n            <div class="contenedorEstrellas">\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n              </div>\n        </ion-item>\n  \n    </ion-list>\n\n<ion-item-divider >\n    <button ion-button full color="light" (click)="editarNegocio(negocioModel)" >\n        Editar Perfil del Negocio\n      </button>\n  </ion-item-divider>\n  <ion-fab right bottom (click)="agregarProducto(negocioModel)">\n      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocio-detalle/negocio-detalle.html"*/,
+            selector: 'page-negocio-detalle',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocio-detalle/negocio-detalle.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>{{negocioModel.nombre}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div class="contBanner">\n        <img class=banner src="/assets/imgs/banner.jpg" alt="">\n        <div class="contLogo">\n          <img class=logo src="/assets/imgs/toks.png" alt="">\n        </div>\n      </div>\n\n    <button ion-button clear (click)="verMapa(negocioModel)" >Ubicación y Horario</button>\n    <h2 class="titNeg">Mis Productos</h2> \n    <ion-list>\n      <ion-item-sliding *ngFor="let prod of productos" class="contNeg">\n          <ion-item>\n            <ion-thumbnail item-start class="logoProd">\n              <img [src]="prod.fotografia" class="logimg">\n            </ion-thumbnail>\n            <h2 class="nombreNeg">{{prod.nombre}}</h2>\n            <div class="contenedorEstrellas">\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n              </div>\n          </ion-item>\n            <ion-item-options>\n              <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>\n          </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n\n<ion-item-divider >\n    <button ion-button full color="light" (click)="editarNegocio(negocioModel)" >\n        Editar Perfil del Negocio\n      </button>\n  </ion-item-divider>\n  <ion-fab right bottom (click)="agregarProducto(negocioModel)">\n      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocio-detalle/negocio-detalle.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavParams */],
@@ -1387,8 +1412,8 @@ var RegisterPage = /** @class */ (function () {
                                     content: 'Iniciando sesion...'
                                 });
                                 loader_1.present().then(function () {
-                                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
                                     loader_1.dismiss();
+                                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
                                 });
                             }
                         }
@@ -1583,6 +1608,7 @@ var baseurlCatNegocio = "https://localhost:5001/api/negocio/catnegocio";
 var baseurlSubCatNegocio = "https://localhost:5001/api/negocio/subcatnegocio";
 var baseurlProductoObtener = "https://localhost:5001/api/negocio/producto/obtener";
 var baseurlProductoAgregar = "https://localhost:5001/api/negocio/producto/agregar";
+var baseurlProductoBorrar = "https://localhost:5001/api/negocio/producto/borrar";
 // aws
 // const baseurlRegistro: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/registro/usuario";
 // const baseurlActualizar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/cuenta/actualizar";
@@ -1716,6 +1742,16 @@ var ElstorapiProvider = /** @class */ (function () {
             throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
         }));
     };
+    ElstorapiProvider.prototype.borrarProducto = function (prod) {
+        var prodModel = JSON.stringify(prod);
+        debugger;
+        return this.http.post(baseurlProductoBorrar, prodModel, httpOptions)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
+            //console.log(data);
+        }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
+            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        }));
+    };
     ElstorapiProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
@@ -1742,51 +1778,51 @@ var map = {
 		12
 	],
 	"../pages/negocio-agregar-producto/negocio-agregar-producto.module": [
-		891,
+		883,
 		11
 	],
 	"../pages/negocio-detalle-editar/negocio-detalle-editar.module": [
-		883,
+		884,
 		10
 	],
 	"../pages/negocio-detalle/negocio-detalle.module": [
-		892,
+		885,
 		9
 	],
 	"../pages/negocios/negocios.module": [
-		884,
+		890,
 		8
 	],
 	"../pages/nuevonegocio/nuevonegocio.module": [
-		885,
+		886,
 		7
 	],
 	"../pages/pedidos-entregados/pedidos-entregados.module": [
-		886,
+		887,
 		6
 	],
 	"../pages/pedidos-no-entregados/pedidos-no-entregados.module": [
-		887,
+		888,
 		5
 	],
 	"../pages/pedidos-todos/pedidos-todos.module": [
-		888,
+		889,
 		4
 	],
 	"../pages/pedidos/pedidos.module": [
-		889,
+		891,
 		3
 	],
 	"../pages/perfil/perfil.module": [
-		890,
+		892,
 		2
 	],
 	"../pages/recuperarcuenta/recuperarcuenta.module": [
-		893,
+		894,
 		1
 	],
 	"../pages/register/register.module": [
-		894,
+		893,
 		0
 	]
 };
@@ -1948,7 +1984,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_negocios_negocios__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_inicio_inicio__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common_http__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(446);
@@ -2043,18 +2079,18 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/inicio/inicio.module#InicioPageModule', name: 'InicioPage', segment: 'inicio', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/negocio-agregar-producto/negocio-agregar-producto.module#NegocioAgregarProductoPageModule', name: 'NegocioAgregarProductoPage', segment: 'negocio-agregar-producto', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/negocio-detalle-editar/negocio-detalle-editar.module#NegocioDetalleEditarPageModule', name: 'NegocioDetalleEditarPage', segment: 'negocio-detalle-editar', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/negocios/negocios.module#NegociosPageModule', name: 'NegociosPage', segment: 'negocios', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/negocio-detalle/negocio-detalle.module#NegocioDetallePageModule', name: 'NegocioDetallePage', segment: 'negocio-detalle', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/nuevonegocio/nuevonegocio.module#NuevonegocioPageModule', name: 'NuevonegocioPage', segment: 'nuevonegocio', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/pedidos-entregados/pedidos-entregados.module#PedidosEntregadosPageModule', name: 'PedidosEntregadosPage', segment: 'pedidos-entregados', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/pedidos-no-entregados/pedidos-no-entregados.module#PedidosNoEntregadosPageModule', name: 'PedidosNoEntregadosPage', segment: 'pedidos-no-entregados', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/pedidos-todos/pedidos-todos.module#PedidosTodosPageModule', name: 'PedidosTodosPage', segment: 'pedidos-todos', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/negocios/negocios.module#NegociosPageModule', name: 'NegociosPage', segment: 'negocios', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/pedidos/pedidos.module#PedidosPageModule', name: 'PedidosPage', segment: 'pedidos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/negocio-agregar-producto/negocio-agregar-producto.module#NegocioAgregarProductoPageModule', name: 'NegocioAgregarProductoPage', segment: 'negocio-agregar-producto', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/negocio-detalle/negocio-detalle.module#NegocioDetallePageModule', name: 'NegocioDetallePage', segment: 'negocio-detalle', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/recuperarcuenta/recuperarcuenta.module#RecuperarcuentaPageModule', name: 'RecuperarcuentaPage', segment: 'recuperarcuenta', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/recuperarcuenta/recuperarcuenta.module#RecuperarcuentaPageModule', name: 'RecuperarcuentaPage', segment: 'recuperarcuenta', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__agm_core__["a" /* AgmCoreModule */].forRoot({ apiKey: 'AIzaSyC49V2M_OYaf8GfKsXN6_Nk-pf50Y5ulcA' }),
@@ -2256,6 +2292,7 @@ var NegociosPage = /** @class */ (function () {
         this.clientid = '';
         this.message = "Obteniendo listado de negocios..";
         this.imgSource = '/assets/imgs/tienda-online-icono-png.png';
+        this.enableButton = true;
         this.userModel = navParams.get('item');
         this.clientid = this.userModel.clientid;
     }
@@ -2285,9 +2322,16 @@ var NegociosPage = /** @class */ (function () {
         loader.present().then(function () {
             _this.api.obtenerNegocio(_this.clientid).subscribe(function (data) {
                 if (data !== null) {
-                    _this.negocioModel = data;
-                    _this.mostrarDiv = false;
-                    console.log(data);
+                    if (data.length == 0) {
+                        _this.negocioModel = data;
+                        _this.enableButton = true;
+                        console.log(data);
+                    }
+                    else {
+                        //disable
+                        _this.negocioModel = data;
+                        _this.enableButton = false;
+                    }
                 }
                 else {
                     toast.present().then(function () {
@@ -2304,7 +2348,7 @@ var NegociosPage = /** @class */ (function () {
     };
     NegociosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-negocios',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocios/negocios.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Listado de negocios : {{userModel.nombreUsuario}}</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content >\n    <div class="user">\n        <img class="imgUser" [src]="imgSource">\n        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>\n    </div>\n\n   <h2 class="titNeg">Mis Negocios</h2> \n  <ion-list>\n    <ion-item *ngFor="let biz of negocioModel" class="contNeg" (click)="negocioDetalle(biz)">\n        <ion-thumbnail item-start class="logo">\n            <img [src]="biz.fotografia">\n          </ion-thumbnail>\n          <h2 class="nombreNeg">{{biz.nombre}}</h2>\n          <div class="contenedorEstrellas">\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n            </div>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-fab right bottom (click)="agregarNegocio($event)">\n      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocios/negocios.html"*/,
+            selector: 'page-negocios',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocios/negocios.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Listado de negocios : {{userModel.nombreUsuario}}</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content >\n    <div class="user">\n        <img class="imgUser" [src]="imgSource">\n        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>\n    </div>\n\n   <h2 class="titNeg">Mis Negocios</h2> \n  <ion-list>\n    <ion-item *ngFor="let biz of negocioModel" class="contNeg" (click)="negocioDetalle(biz)">\n        <ion-thumbnail item-start class="logo">\n            <img [src]="biz.fotografia">\n          </ion-thumbnail>\n          <h2 class="nombreNeg">{{biz.nombre}}</h2>\n          <div class="contenedorEstrellas">\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n            </div>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-fab right bottom (click)="agregarNegocio($event)">\n      <button *ngIf="enableButton" ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/mobile-app/migue/src/pages/negocios/negocios.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */],
