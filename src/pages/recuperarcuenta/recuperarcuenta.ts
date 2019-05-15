@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
@@ -62,11 +63,20 @@ export class RecuperarcuentaPage {
         let alert = this.alertCtrl.create({
           title: title,
           subTitle: subTitle,
-          buttons: ['Ok']
+          buttons: [{
+            text: 'Ok',
+          handler: () => {
+    
+            if(title == 'Cuenta Recuperada')
+            {
+              this.navCtrl.push(LoginPage);
+            }
+          }
+        }]
         });
 
         alert.present().then(() => {
-
+        
         });
       },
        (error: any) => {

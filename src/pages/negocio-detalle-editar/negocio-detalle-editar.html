@@ -67,7 +67,7 @@
                         <ion-item class="campo">
                           <ion-input p class="entrada"laceholder="Codigo Postal" [disabled]="editar" type="text" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>
                         </ion-item>
-                        <ion-item *ngIf="codigopostal.hasError('required') && codigopostal.touched">
+                            <ion-item *ngIf="(codigopostal.hasError('required') && codigopostal.touched) || (codigopostal.hasError('maxLength'))">
                           <p>
                       *Codigo Postal es obligatorio
                           </p>
