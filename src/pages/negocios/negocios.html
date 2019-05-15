@@ -11,11 +11,12 @@
 
    <h2 class="titNeg">Mis Negocios</h2> 
   <ion-list>
-    <ion-item *ngFor="let biz of negocioModel" class="contNeg" (click)="negocioDetalle(biz)">
+    <!-- <ion-item *ngFor="let biz of negocioModel" class="contNeg" (click)="negocioDetalle(biz)"> -->
+    <ion-item class="contNeg" (click)="negocioDetalle(negocioModel)">
         <ion-thumbnail item-start class="logo">
-            <img [src]="biz.fotografia">
+            <img [src]="imgSourceNeg">
           </ion-thumbnail>
-          <h2 class="nombreNeg">{{biz.nombre}}</h2>
+          <h2 class="nombreNeg">{{negocioModel.nombre}}</h2>
           <div class="contenedorEstrellas">
               <ion-icon class="estrella" name='star'></ion-icon>
               <ion-icon class="estrella" name='star'></ion-icon>

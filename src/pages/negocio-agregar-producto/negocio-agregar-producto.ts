@@ -73,7 +73,7 @@ export class NegocioAgregarProductoPage {
       buttons: [{
         text: 'Ok',
       handler: () => {
-
+        toast.dismiss();
         this.navCtrl.push(NegocioDetallePage, {item:this.negocioModel});
       }
     }]

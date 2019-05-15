@@ -6,6 +6,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { t } from '@angular/core/src/render3';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
@@ -15,11 +16,12 @@ import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 export class NegociosPage {
 
   userModel: User = new User();
-  negocioModel: Negocio[];
+  negocioModel: Negocio = new Negocio();
   mostrarDiv: boolean = false;
   clientid: string = '';
   message:string = "Obteniendo listado de negocios..";
 
+  imgSourceNeg:any  = '/assets/imgs/tienda-online-icono-png.png';
   imgSource:any  = '/assets/imgs/tienda-online-icono-png.png';
 
   tcontroller: ToastController;
@@ -31,12 +33,11 @@ export class NegociosPage {
             public api: ElstorapiProvider,
             public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
-              public toastController: ToastController)
+              public toastController: ToastController,
+              private _sanitizer: DomSanitizer)
   {
     this.userModel =  navParams.get('item');
     this.clientid = this.userModel.clientid;
-
-
   }
 
   ionViewDidLoad() {}
@@ -74,16 +75,19 @@ export class NegociosPage {
         (data: Negocio[]) => {
           if(data !== null)
           {
+            this.negocioModel = data[0];
+
+            this.imgSourceNeg = data[0].fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
+                this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+                + data[0].fotografia): this.imgSourceNeg;
+
               if(data.length == 0)
               {
-                this.negocioModel = data;
                 this.enableButton = true;
                 console.log(data);
               }
               else
               {
-                //disable
-                this.negocioModel = data;
                 this.enableButton = false;
               }
           }
@@ -99,6 +103,8 @@ export class NegociosPage {
           });
          loader.dismiss();
     });
+
+   
   }
 
   borrar(bzz)

@@ -21,7 +21,7 @@ export class InicioPage {
   {
       this.userModel = navParams.get('item');
       debugger
-      this.imgSource = this.userModel.fotografia !== "" ? 
+      this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
                         this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
                         + this.userModel.fotografia): this.imgSource;
 

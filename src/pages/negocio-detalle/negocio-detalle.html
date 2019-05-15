@@ -6,9 +6,9 @@
 
 <ion-content>
     <div class="contBanner">
-        <img class=banner src="/assets/imgs/banner.jpg" alt="">
+        <img class=banner [src]="imgSourceBanner" alt="">
         <div class="contLogo">
-          <img class=logo src="/assets/imgs/toks.png" alt="">
+          <img class=logo [src]="imgSourceLogo" alt="">
         </div>
       </div>
 
@@ -18,7 +18,7 @@
       <ion-item-sliding *ngFor="let prod of productos" class="contNeg">
           <ion-item>
             <ion-thumbnail item-start class="logoProd">
-              <img [src]="prod.fotografia" class="logimg">
+              <img [src]=" prod.fotografia !== ''? 'data:image/jpeg;base64,' + prod.fotografia: imgSourceProd" class="logimg">
             </ion-thumbnail>
             <h2 class="nombreNeg">{{prod.nombre}}</h2>
             <div class="contenedorEstrellas">

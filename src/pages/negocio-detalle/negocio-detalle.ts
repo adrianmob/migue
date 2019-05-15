@@ -6,6 +6,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NegocioAgregarProductoPage } from '../negocio-agregar-producto/negocio-agregar-producto';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
+import { DomSanitizer } from '@angular/platform-browser';
+import { NgForOf } from '@angular/common';
 
 @IonicPage()
 @Component({
@@ -15,7 +17,12 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 export class NegocioDetallePage {
 
   negocioModel: Negocio;
-  imgSource:any  = '/assets/imgs/user.png';
+
+  imgSourceProd:any  = '/assets/imgs/user.png';
+
+  imgSourceBanner:any  = '/assets/imgs/banner.jpg';
+  imgSourceLogo:any  = '/assets/imgs/toks.png';
+
   mostrarDiv: boolean = false;
   productos: Producto[];
   //producto model
@@ -24,9 +31,15 @@ export class NegocioDetallePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public geolocation: Geolocation,
-    public api: ElstorapiProvider) {
+    public api: ElstorapiProvider,
+    private _sanitizer: DomSanitizer) {
 
       this.negocioModel =  navParams.get('item');
+
+      debugger
+      // this.imgSourceProd = this.negocioModel.fotografia !=='/assets/imgs/user.png' ? 
+      //                   this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+      //                   + this.negocioModel.fotografia): this.imgSourceProd;
       console.log(this.negocioModel);
   }
 
@@ -60,6 +73,8 @@ export class NegocioDetallePage {
       (data: Producto[]) => {
         if(data !== null)
         {
+         
+        
           this.productos = data;
         }
         else

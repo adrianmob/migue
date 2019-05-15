@@ -4,6 +4,7 @@ import { User } from '../../models/model';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
@@ -34,7 +35,8 @@ export class PerfilPage {
     public alertCtrl: AlertController,
     public api: ElstorapiProvider,
     public toastController: ToastController,
-    public camera: Camera)
+    public camera: Camera,
+    private _sanitizer: DomSanitizer)
     {
       this.formGroup = formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
@@ -57,6 +59,10 @@ export class PerfilPage {
       this.numeroTelefonico = this.formGroup.controls['numeroTelefonico'];
 
       this.userModel =  navParams.get('item');
+
+      this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
+                          this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+                          + this.userModel.fotografia): this.imgSource;
   }
 
   ionViewDidLoad() {}

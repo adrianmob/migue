@@ -6,6 +6,7 @@ import { SubCatNegocio, Negocio, CatNegocio, User } from '../../models/model';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { NegociosPage } from '../negocios/negocios';
 import { Geolocation } from '@ionic-native/geolocation';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @IonicPage()
@@ -33,8 +34,11 @@ export class NegocioDetalleEditarPage {
   FK_subcategoria:AbstractControl;
   descripcion:AbstractControl;
 
-  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
-  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
+  // imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
+  // imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
+
+  imgSourceBanner:any  = '/assets/imgs/banner.jpg';
+  imgSourceLogo:any  = '/assets/imgs/toks.png';
 
   cameraImgLogo:any = null;
   cameraImgBanner:any = null;
@@ -50,7 +54,8 @@ export class NegocioDetalleEditarPage {
     public alertCtrl: AlertController,
     public api: ElstorapiProvider,
     public geolocation: Geolocation,
-    public camera: Camera,) {
+    public camera: Camera,
+    private _sanitizer: DomSanitizer) {
 
     this.formGroup = formBuilder.group({
       nombre: ['',[Validators.required]],
@@ -80,6 +85,17 @@ export class NegocioDetalleEditarPage {
 
 
       this.negocio =  navParams.get('item');
+
+      //Banner
+      this.negocio.fotografia =   this.negocio.fotografia !== '/assets/imgs/banner.jpg' ? 
+      this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+      +   this.negocio.fotografia): this.imgSourceBanner;
+
+        //Logo
+        this.negocio.fotografia2 =   this.negocio.fotografia2 !== '/assets/imgs/toks.png' ? 
+        this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+        +   this.negocio.fotografia2): this.imgSourceLogo;
+
   }
 
   ionViewDidLoad() {}

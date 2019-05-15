@@ -72,9 +72,11 @@ export class RegisterPage {
     let subTitle = '';
     this.userModel = usr;
     this.userModel.fotografia = this.imgSource;
-
+    debugger
     this.api.registrarUsuario(usr).subscribe(
+      
       (data: User) => {
+        debugger
         title = data !== null? 'Usuario Creado':
                 data === null? 'El correo ya esta registrado':
                                           'Ocurrio un error';

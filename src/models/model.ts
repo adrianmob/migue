@@ -38,6 +38,7 @@ export class Negocio
     longitud:string = "";
     active:number = 1;
     fotografia:string = "";
+    fotografia2:string = "";
     id_negocio:number = 0;
 
     constructor()
